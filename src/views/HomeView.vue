@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="flex flex-col justify-left px-10 py-6 md:px-10 md:py-6">
+    <img
+      alt="Vue logo"
+      src="../assets/inbank-logo.svg"
+      class="w-[113px] h-[40px] md:w-[182px] md:h-[64px]"
+    />
   </div>
+  <CalculatorComponent />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import CalculatorComponent from '@/components/CalculatorComponent.vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "HomeView",
+  name: 'HomeView',
   components: {
-    HelloWorld,
+    CalculatorComponent,
   },
 });
 </script>
