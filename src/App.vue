@@ -1,14 +1,12 @@
 <template>
-  <router-view />
+  <div id="app" class="min-h-screen bg-custom-bg text-custom-text">
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #21093a;
+  min-height: 100vh;
 }
 
 nav {
