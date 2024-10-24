@@ -31,6 +31,7 @@
         <Field name="firstName" v-slot="{ field, errorMessage, meta }">
           <TextInput
             id="firstName"
+            :fullWidth="true"
             label="First name"
             v-bind="field"
             :modelValue="field.value"
@@ -44,6 +45,7 @@
         <Field name="lastName" v-slot="{ field, errorMessage, meta }">
           <TextInput
             id="lastName"
+            :fullWidth="true"
             label="Last name"
             v-bind="field"
             :modelValue="field.value"
@@ -57,6 +59,7 @@
         <Field name="mobileNumber" v-slot="{ field, errorMessage, meta }">
           <TextInput
             id="mobileNumber"
+            :fullWidth="true"
             label="Mobile number"
             type="tel"
             v-bind="field"
@@ -71,6 +74,7 @@
         <Field name="email" v-slot="{ field, errorMessage, meta }">
           <TextInput
             id="email"
+            :fullWidth="true"
             label="E-mail"
             type="email"
             v-bind="field"
@@ -85,6 +89,7 @@
         <Field name="monthlyIncome" v-slot="{ field, errorMessage, meta }">
           <TextInput
             id="monthlyIncome"
+            :fullWidth="true"
             label="Monthly income"
             type="number"
             v-bind="field"

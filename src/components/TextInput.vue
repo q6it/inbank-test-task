@@ -11,9 +11,10 @@
         @blur="isActive = false"
         :placeholder="placeholder"
         :class="[
-          'w-full md:w-[160px] px-3 py-2 border rounded-md transition-colors duration-200 ease-in-out',
+          'w-full px-3 py-2 border rounded-md transition-colors duration-200 ease-in-out',
           'focus:outline-none focus:ring-2 focus:ring-opacity-50',
           'placeholder-transparent caret-transparent',
+          fullWidth ? 'w-full' : 'md:w-[160px]',
           inputColorClass,
           { 'placeholder-gray-400': !isActive && !isError },
           disabled ? 'text-gray-400' : '',
@@ -40,14 +41,15 @@
 import { ref, computed } from 'vue';
 
 const props = defineProps({
+  disabled: { type: Boolean, default: false },
+  fullWidth: { type: Boolean, default: true },
   id: { type: String, required: true },
+  isError: { type: Boolean, default: false },
   label: { type: String, required: true },
   modelValue: { type: [String, Number], default: '' },
-  type: { type: String, default: 'text' },
   placeholder: { type: String, default: '' },
   supportingText: { type: String, default: '' },
-  isError: { type: Boolean, default: false },
-  disabled: { type: Boolean, default: false },
+  type: { type: String, default: 'text' },
 });
 
 const emit = defineEmits(['update:modelValue']);

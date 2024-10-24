@@ -64,6 +64,7 @@
                   type="text"
                   :min="300"
                   :max="7200"
+                  :fullWidth="false"
                   id="amount-input"
                 />
               </div>
