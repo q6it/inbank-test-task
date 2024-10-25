@@ -145,7 +145,6 @@ const onSubmit = async () => {
   const { valid, errors } = await validate();
 
   if (!valid) {
-    console.log('Form validation failed:', errors);
     return;
   }
 

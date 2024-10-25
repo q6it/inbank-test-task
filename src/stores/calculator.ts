@@ -32,7 +32,6 @@ export const useCalculatorStore = defineStore('calculator', () => {
       (amount.value * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
       (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
-    console.log('🚀 ~ calculatedMonthlyPayment ~ payment:', payment);
     return payment.toFixed(2);
   });
 
