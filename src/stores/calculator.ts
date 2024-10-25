@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
 export const useCalculatorStore = defineStore('calculator', () => {
-  const amount = ref('500');
-  const period = ref('48');
+  const amount = ref(500);
+  const period = ref(24);
   const firstName = ref('');
   const lastName = ref('');
   const mobilePhone = ref('');
@@ -19,14 +19,21 @@ export const useCalculatorStore = defineStore('calculator', () => {
   });
 
   const calculatedMonthlyPayment = computed(() => {
-    const rate = 3.476;
-    const monthlyRate = rate / 12;
+    const annualInterestRatePercentage = 3.476;
+    const annualInterestRate = annualInterestRatePercentage / 100;
+    const monthlyInterestRate = annualInterestRate / 12;
     const numberOfPayments = period.value;
-    const payment =
-      (Number(amount.value) * monthlyRate * Math.pow(1 + monthlyRate, Number(numberOfPayments))) /
-      (Math.pow(1 + monthlyRate, Number(numberOfPayments)) - 1);
 
-    return parseFloat(payment.toFixed(2));
+    if (monthlyInterestRate === 0) {
+      return (amount.value / numberOfPayments).toFixed(2);
+    }
+
+    const payment =
+      (amount.value * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+      (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+    console.log('🚀 ~ calculatedMonthlyPayment ~ payment:', payment);
+    return payment.toFixed(2);
   });
 
   return {

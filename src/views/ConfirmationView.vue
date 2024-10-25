@@ -53,5 +53,5 @@ const store = useCalculatorStore();
 
 const formattedAmount = computed(() => store.amount.toLocaleString());
 const period = computed(() => store.period);
-const formattedMonthlyPayment = computed(() => store.calculatedMonthlyPayment.toFixed(2));
+const formattedMonthlyPayment = computed(() => store.calculatedMonthlyPayment);
 </script>
