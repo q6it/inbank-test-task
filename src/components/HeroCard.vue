@@ -34,9 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, ref, onMounted, onUnmounted } from 'vue';
 import BaseButton from './BaseButton.vue';
-import { computed } from 'vue';
 
 interface ImageContent {
   imageSrc: string;
@@ -57,11 +56,19 @@ const props = defineProps({
   width: { type: String, default: '' },
 });
 
-const computedWidth = computed(() => {
-  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-    return '100%';
-  }
-  return props.width;
+const computedWidth = ref(props.width);
+
+const updateWidth = () => {
+  computedWidth.value = window.innerWidth <= 768 ? '100%' : props.width;
+};
+
+onMounted(() => {
+  updateWidth(); // Set initial width
+  window.addEventListener('resize', updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWidth);
 });
 
 defineEmits<{
