@@ -87,7 +87,7 @@
               </div>
               <div class="w-full md:w-32 order-1 md:order-none">
                 <SelectInput
-                  v-model="store.period"
+                  v-model="periodAsString"
                   label="Period"
                   :options="periodOptions"
                   id="period-select"
@@ -119,7 +119,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useCalculatorStore } from '../stores/calculator';
 import ModalForm from './ModalForm.vue';
 import HeroCard from './HeroCard.vue';
@@ -146,6 +146,13 @@ const periodOptions = Array.from({ length: 71 }, (_, i) => ({
   label: `${i + 2} months`,
 }));
 
+const periodAsString = computed({
+  get: () => store.period.toString(),
+  set: (value) => {
+    store.period = parseInt(value, 10);
+  },
+});
+
 function updateRangeBackground(event: Event, type: 'amount' | 'period') {
   const input = event.target as HTMLInputElement;
   const min = parseInt(input.min);
@@ -168,18 +175,16 @@ watch(
   }
 );
 
-watch(
-  () => store.period,
-  (newValue) => {
-    const input = document.getElementById('period-select') as HTMLInputElement;
-    if (input) {
-      const min = 2;
-      const max = 72;
-      const percentage = ((Number(newValue) - min) / (max - min)) * 100;
-      input.style.setProperty('--value', `${percentage}%`);
-    }
+// Update the watch function to use periodAsString
+watch(periodAsString, (newValue) => {
+  const input = document.getElementById('period-select') as HTMLInputElement;
+  if (input) {
+    const min = 2;
+    const max = 72;
+    const percentage = ((parseInt(newValue, 10) - min) / (max - min)) * 100;
+    input.style.setProperty('--value', `${percentage}%`);
   }
-);
+});
 </script>
 
 <style scoped>
